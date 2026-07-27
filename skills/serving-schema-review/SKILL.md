@@ -2,6 +2,7 @@
 name: serving-schema-review
 description: Reviews a concrete app-serving schema (DDL, ERD, table defs, or data contract) for a layer replicated from an analytics gold layer - severity-ranked findings with fixes. Use when asked to review, critique, audit, or check production readiness of such a schema. Not for pre-DDL design grilling (grill-my-schema), BI star-schema reviews, source-of-record OLTP schemas, or API/JSON/Avro schemas.
 argument-hint: schema artifact - DDL, ERD, table defs, or contract
+license: MIT
 ---
 
 # serving-schema-review

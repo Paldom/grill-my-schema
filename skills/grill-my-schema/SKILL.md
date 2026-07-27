@@ -2,6 +2,7 @@
 name: grill-my-schema
 description: Grills the design of an app-serving database schema on an analytics gold layer - prioritized hard questions on access patterns, freshness, writes, tenancy, evolution, ideally before DDL exists. Use when the user says grill/challenge/stress-test/interrogate my schema plan or asks what could go wrong with it. Not for reviewing or generating DDL/ERDs, star-schema/BI modeling, or plain OLTP databases.
 argument-hint: design context - UI screens, gold tables, target store
+license: MIT
 ---
 
 # grill-my-schema
