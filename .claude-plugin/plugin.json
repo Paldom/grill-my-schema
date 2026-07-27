@@ -1,0 +1,11 @@
+{
+  "name": "grill-my-schema",
+  "description": "Asks challenging design-review questions for application-serving database schemas built on an analytics gold layer - covering access patterns, modeling, denormalization, sync, and evolution. Platform independent.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Paldom",
+    "url": "https://github.com/Paldom"
+  },
+  "homepage": "https://github.com/Paldom/grill-my-schema",
+  "license": "MIT"
+}

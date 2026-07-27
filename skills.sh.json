@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Serving-schema design review",
+      "description": "Stress-test the database layer your app reads on top of an analytics gold layer - hard questions before DDL exists, severity-ranked review once it does.",
+      "skills": ["grill-my-schema", "serving-schema-review"]
+    }
+  ]
+}

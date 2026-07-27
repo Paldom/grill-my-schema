@@ -1,0 +1,129 @@
+{
+  "skill": "grill-my-schema",
+  "cases": [
+    {
+      "type": "should_trigger",
+      "prompt": "Grill my data schema: I have the UI design and a semantic layer over our gold data, and I'm designing the schema the app will consume directly."
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "I'm designing an app-serving layer on top of our warehouse gold tables. Ask me the hard questions before I write any DDL."
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "challenge my schema design for the new customer portal - data comes from our lakehouse and syncs into postgres"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "What questions should I answer before designing a serving schema that our application reads directly?"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "stress test my plan: gold layer -> synced read models -> app queries them directly. what am i missing?"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "Play devil's advocate on the data model for the application database that mirrors our analytics layer."
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "we're about to build a platinum/serving layer for the app on Databricks Lakebase, interrogate the design pls"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "can u grill me on my serving db desing? ui mockups are done, semantic layer exists"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "Our frontend will query a Postgres copy of our warehouse data. Before we model the tables, what could go wrong with this plan?"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "Quiz me on freshness, tenancy, and schema evolution for the app-facing layer we're adding over gold."
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "Here's our draft DDL for context, but don't review it yet - just ask me the hard questions we haven't answered about the serving layer."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Review this DDL for our serving schema: CREATE TABLE customer_read (customer_id BIGINT PRIMARY KEY, risk_score NUMERIC, segment TEXT);"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Design a star schema for our sales data warehouse with fact and dimension tables."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Help me normalize the OLTP schema for my e-commerce ordering microservice."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Write the Lakebase synced table DAB config for prod.gold.customer_risk."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Why is this query against our gold table so slow? Here's the EXPLAIN output."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Set up metric views as a semantic layer over our gold tables."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Review my dbt models for the silver layer transformations."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Ask me hard questions about my system design for a chat application."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Create a JSON Schema to validate our service config files."
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "Generate the serving-layer table definitions from these UI wireframes."
+    },
+    {
+      "type": "quality",
+      "prompt": "Grill my schema plan: a React dashboard shows customer cards (name, risk score, open cases) and a case queue with infinite scroll. Data lives in our lakehouse gold layer (star schema) and will sync into a managed Postgres the app reads directly. Case assignments are made in the app.",
+      "expected_behavior": [
+        "asks for the concrete access-pattern inventory (screens/endpoints with filters, sorts, page sizes) before or alongside deeper questions rather than jumping to table shapes",
+        "asks prioritized questions drawn from multiple axes (access patterns, keys and sync constraints, freshness SLA, read/write separation for case assignments, tenancy/PII, evolution, failure modes, ownership) instead of dumping an undifferentiated list",
+        "flags the app-write concern explicitly: case assignments must live in app-owned writable tables, not in tables replicated from gold",
+        "questions are tied to the user's stated context (infinite scroll implies pagination strategy; risk score implies freshness/staleness question)",
+        "stays platform-independent, mapping to the user's named stack only as examples"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "We want to add a serving schema over our gold layer for a new internal app. That's all we know so far - grill us.",
+      "expected_behavior": [
+        "recognizes the input is too thin and starts with the highest-leverage discovery questions (query inventory, freshness expectations, write paths, tenancy, volumes) rather than inventing assumptions",
+        "explains briefly why each early question matters (what failure it prevents)",
+        "produces an organized gap list or decision checklist the team can take away",
+        "does not produce DDL or a concrete schema design at this stage"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Here are our answers to your grilling: reads are point lookups by customer_id plus one list view sorted by updated_at; freshness must be under 5 minutes; the app writes only annotations; single tenant; PII limited to name/email. What risks remain?",
+      "expected_behavior": [
+        "records or summarizes the answered decisions and derives the remaining open risks from them (e.g., sync mode implications of a 5-minute SLA, index/cursor needs of the sorted list view, where annotations live and how they join to replicated rows, whether name/email even need to be in the serving copy)",
+        "distinguishes settled questions from unresolved ones instead of re-asking everything",
+        "recommends reviewing the concrete schema once DDL exists (handing off to a schema review) as the natural next step"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Interrogate this design: we plan to point the web app straight at the gold tables in the warehouse to avoid building another layer.",
+      "expected_behavior": [
+        "challenges the direct-to-gold plan with concrete failure modes (latency/concurrency mismatch, coupling of app to warehouse refactors, cost per query, no app write path) phrased as questions or evidence, not dogma",
+        "asks what latency, concurrency, and availability the UI actually needs so the decision is grounded in requirements",
+        "acknowledges the cases where serving gold directly is acceptable (internal analytics dashboards tolerant of warehouse latency)",
+        "remains platform-agnostic in its reasoning"
+      ]
+    }
+  ]
+}
