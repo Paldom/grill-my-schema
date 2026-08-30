@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.svg" alt="grill-my-schema icon" width="128"/>
+</p>
+
 # Grill My Schema
 
 [![CI](https://github.com/Paldom/grill-my-schema/actions/workflows/ci.yml/badge.svg)](https://github.com/Paldom/grill-my-schema/actions/workflows/ci.yml)
